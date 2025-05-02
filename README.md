@@ -34,7 +34,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository:
    ```bash
    git clone https://github.com/kyoucef27/react-webapp-shop.git
-   cd react-webapp-shop/FRONTEND
+   cd react-webapp-shop
    ```
 
 2. Install dependencies:

@@ -67,7 +67,7 @@ exports.handler = async (event) => {
 
 
     try {
-      const backendRes = await fetch(`http://localhost:3000/api/order`, {
+      const backendRes = await fetch(`https://dashboard-pied-pi-90.vercel.app/api/order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({order}),

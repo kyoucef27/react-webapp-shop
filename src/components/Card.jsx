@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../Hooks/Hooks';
 import { Heart, ShoppingBag, Eye, TrendingUp, Maximize2 } from 'lucide-react';
-import data from './data';
+
 import { motion } from 'framer-motion';
 
 const Card = ({ 
@@ -21,7 +21,7 @@ const Card = ({
     isInCompare 
 }) => {
     const navigate = useNavigate();
-    const { toggleFavorite, isProductFavorite } = useCart();
+    const { toggleFavorite, isProductFavorite, data } = useCart();
     const product = { id: ID, name: productName, price: productPrice, desc: ProductDisc };
     const isFavorite = isProductFavorite(ID);
     const [isHovered, setIsHovered] = useState(false);
@@ -33,11 +33,11 @@ const Card = ({
         localStorage.setItem(`product_${id}_views`, newViews);
         console.log(`Views updated for product ${id}: ${newViews}`);
         const productIndex = data.findIndex(product => product.id === id);
+        
         if (productIndex !== -1) {
             data[productIndex].views = newViews;
         }
     }
-
     const goToProduct = () => {
         navigate(`/product/${ID}`);
     }
@@ -72,7 +72,7 @@ const Card = ({
                     <div className={`absolute inset-0 bg-gray-200 ${imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}></div>
                     <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out"
-                        src={`../assets/img${ID}.jpg`}
+                        src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${ID}.avif`}
                         alt={productName}
                         style={{ transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
                         onLoad={() => setImageLoaded(true)}

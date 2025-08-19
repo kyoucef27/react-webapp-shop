@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Card from './Card'
-import Products from './data'
 import { useSearch } from '../Hooks/SearchHooks'
 import QuickView from './QuickView'
-
+import { useCart } from '../Hooks/Hooks'
 const Items = ({ onAddToCart, filter, ProductNumber, onToggleCompare, isProductInCompare }) => {
+    const { data } = useCart();
+    const Products = data;
     const filteredProducts = Products.filter(Product => filter === 'all' || Product.gender === filter);
     const {
         searchFilter,
@@ -31,18 +32,18 @@ const Items = ({ onAddToCart, filter, ProductNumber, onToggleCompare, isProductI
                     {filteredData.length > 0 ? (
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4'>
                             {filteredData.map(Product => (
-                                <div key={Product.id}>
+                                <div key={Product.specid}>
                                     <Card
                                         productName={Product.name}
                                         productPrice={Product.price}
                                         ProductDisc={Product.desc}
-                                        ID={Product.id}
+                                        ID={Product.specid}
                                         onAddToCart={() => onAddToCart(Product)}
                                         ProductNumber={ProductNumber}
                                         views={Product.views}
                                         onQuickView={() => handleOpenQuickView(Product)}
                                         onToggleCompare={() => onToggleCompare && onToggleCompare(Product)}
-                                        isInCompare={isProductInCompare && isProductInCompare(Product.id)}
+                                        isInCompare={isProductInCompare && isProductInCompare(Product.specid)}
                                     />
                                 </div>
                             ))}
@@ -50,7 +51,7 @@ const Items = ({ onAddToCart, filter, ProductNumber, onToggleCompare, isProductI
                     ) : (
                         <div className="text-center py-10">
                             <p className="text-xl text-gray-500">No products found</p>
-                            <button 
+                            <button
                                 className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
                                 onClick={clearSearch}
                             >
@@ -62,12 +63,12 @@ const Items = ({ onAddToCart, filter, ProductNumber, onToggleCompare, isProductI
             ) : (
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4'>
                     {filteredProducts.map(Product => (
-                        <div key={Product.id}>
+                        <div key={Product.specid}>
                             <Card
                                 productName={Product.name}
                                 productPrice={Product.price}
                                 ProductDisc={Product.desc}
-                                ID={Product.id}
+                                ID={Product.specid}
                                 onAddToCart={() => onAddToCart(Product)}
                                 ProductNumber={ProductNumber}
                                 views={Product.views}
@@ -80,10 +81,10 @@ const Items = ({ onAddToCart, filter, ProductNumber, onToggleCompare, isProductI
                 </div>
             )}
 
-            <QuickView 
-                product={quickViewProduct} 
-                isOpen={isQuickViewOpen} 
-                onClose={handleCloseQuickView} 
+            <QuickView
+                product={quickViewProduct}
+                isOpen={isQuickViewOpen}
+                onClose={handleCloseQuickView}
             />
         </>
     );

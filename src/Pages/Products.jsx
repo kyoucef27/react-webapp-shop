@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import Items from '../components/Items'
 import NavBar from '../components/NavBar'
 import { useCart } from '../Hooks/Hooks'
-import productsData from '../components/data'
 
 const Products = () => {
   const {
     ProductNumber,
     handleAddToCart,
-    currentFilter
+    currentFilter,
+    data
   } = useCart();
-  
+  const productsData = data
   
   return (          
     <div>

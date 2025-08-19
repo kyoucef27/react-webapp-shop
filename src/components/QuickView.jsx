@@ -58,7 +58,7 @@ const QuickView = ({ product, isOpen, onClose }) => {
                             <div className="w-full md:w-1/2 relative">
                                 <div className="aspect-square overflow-hidden">
                                     <img
-                                        src={`../assets/img${product.id}.jpg`}
+                                        src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${ID}.avif`}
                                         alt={product.name}
                                         className="w-full h-full object-cover"
                                     />
@@ -100,8 +100,8 @@ const QuickView = ({ product, isOpen, onClose }) => {
                                                 whileTap={{ scale: 0.95 }}
                                                 key={size}
                                                 className={`h-9 w-9 rounded-md flex items-center justify-center border ${selectedSize === size
-                                                        ? 'bg-indigo-600 text-white border-indigo-600'
-                                                        : 'border-gray-300 text-gray-700 hover:border-indigo-400'
+                                                    ? 'bg-indigo-600 text-white border-indigo-600'
+                                                    : 'border-gray-300 text-gray-700 hover:border-indigo-400'
                                                     } transition-colors`}
                                                 onClick={() => handleSizeSelect(size)}
                                             >

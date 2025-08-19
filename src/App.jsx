@@ -7,12 +7,12 @@ import Product from './Pages/Product'
 import Homepage from './Pages/Homepage'
 import Favorites from './Pages/Favorites'
 import CartNotification from './components/CartNotification'
-
 const App = () => {
     const { cartItems, notification } = useCart();
     
     return (
         <div className="overflow-x-hidden w-full">
+            
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Homepage/>} />
@@ -29,6 +29,7 @@ const App = () => {
                     type={notification.type}
                 />
             </BrowserRouter>
+            
         </div>
     )
 }

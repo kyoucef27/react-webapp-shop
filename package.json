@@ -13,8 +13,11 @@
     "@headlessui/react": "^2.2.2",
     "@hugeicons/react": "^1.0.5",
     "@tailwindcss/vite": "^4.1.4",
+    "cloudinary": "^2.7.0",
+    "express-rate-limit": "^8.0.1",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.501.0",
+    "mongoose": "^8.17.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icon": "^1.0.0",
@@ -24,7 +27,8 @@
     "react-router": "^7.5.1",
     "react-router-dom": "^7.5.1",
     "swiper": "^11.2.6",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "^4.1.4",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

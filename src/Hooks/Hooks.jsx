@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSearch } from './SearchHooks';
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
     const [checkout, setCheckout] = useState(false);
@@ -11,42 +10,66 @@ const CartProvider = ({ children }) => {
     const [activeLink, setActiveLink] = useState('');
     const [favorites, setFavorites] = useState([]);
     const [selectedSize, setSelectedSize] = useState('M');
-    
+
+    const [data, setData] = useState([]);
+
+
     const [notification, setNotification] = useState({
         isVisible: false,
         message: '',
         product: null,
         type: 'success'
     });
+
     
-    const {
-        clearSearch
-    } = useSearch();
-    
+    // data
+    useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/.netlify/functions/products');
+        const json = await res.json();
+
+        
+        if (json.success) {
+          setData(json.products);
+       
+        } else {
+          console.error('Fetch error:', json.error);
+        }
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+
+
     useEffect(() => {
         const savedCart = localStorage.getItem('cartItems');
         const savedFavorites = localStorage.getItem('favorites');
-        
+
         if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
             setCartItems(parsedCart);
             setCartItemsNumber(parsedCart.length);
             setProductNumber(parsedCart.length);
         }
-        
+
         if (savedFavorites) {
             setFavorites(JSON.parse(savedFavorites));
         }
     }, []);
-    
+
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
-    
+
     useEffect(() => {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }, [favorites]);
-    
+
     const showNotification = (message, product, type = 'success') => {
         setNotification({
             isVisible: true,
@@ -54,18 +77,18 @@ const CartProvider = ({ children }) => {
             product,
             type
         });
-        
+
         setTimeout(() => {
             setNotification(prev => ({ ...prev, isVisible: false }));
         }, 3000);
     };
-    
+
     const handleClickLink = (e, category, name) => {
         e.preventDefault();
         handleFilter(category);
-        setActiveLink(name); 
+        setActiveLink(name);
     };
-    
+
     const clearCartItem = (id) => {
         const updatedCartItems = cartItems.filter(item => item.id !== id);
         setCartItems(updatedCartItems);
@@ -77,13 +100,13 @@ const CartProvider = ({ children }) => {
     const ClearCart = () => {
         setCartItems([]);
         setCartItemsNumber(0);
-    }   
-    
+    }
+
     const handleAddToCart = (product) => {
         const existingItemIndex = cartItems.findIndex(
             item => item.id === product.id && item.selectedSize === (product.selectedSize || selectedSize)
         );
-        
+
         if (existingItemIndex >= 0) {
             const updatedCartItems = [...cartItems];
             if (!updatedCartItems[existingItemIndex].quantity) {
@@ -91,29 +114,29 @@ const CartProvider = ({ children }) => {
             }
             updatedCartItems[existingItemIndex].quantity += 1;
             setCartItems(updatedCartItems);
-            
+
             showNotification('Added one more to your cart!', product, 'cart');
         } else {
-            setCartItems([...cartItems, { 
-                ...product, 
-                quantity: 1, 
-                selectedSize: product.selectedSize || selectedSize 
+            setCartItems([...cartItems, {
+                ...product,
+                quantity: 1,
+                selectedSize: product.selectedSize || selectedSize
             }]);
-            
+
             showNotification('Added to your cart!', product, 'cart');
         }
-        
+
         setCartItemsNumber(cartItemsNumber + 1);
         setProductNumber(ProductNumber + 1);
     };
-    
+
     const handleSizeSelect = (size) => {
         setSelectedSize(size);
     };
-    
+
     const decreaseQuantity = (productId) => {
         const existingItemIndex = cartItems.findIndex(item => item.id === productId);
-        
+
         if (existingItemIndex >= 0) {
             const updatedCartItems = [...cartItems];
             if (updatedCartItems[existingItemIndex].quantity > 1) {
@@ -126,10 +149,10 @@ const CartProvider = ({ children }) => {
             }
         }
     };
-    
+
     const toggleFavorite = (product) => {
         const isFavorite = favorites.some(item => item.id === product.id);
-        
+
         if (isFavorite) {
             setFavorites(favorites.filter(item => item.id !== product.id));
             showNotification('Removed from favorites', product, 'success');
@@ -138,26 +161,27 @@ const CartProvider = ({ children }) => {
             showNotification('Added to favorites', product, 'success');
         }
     };
-    
+
     const isProductFavorite = (productId) => {
         return favorites.some(item => item.id === productId);
     };
-    
+
     const handleFilter = (filter) => {
         setCurrentFilter(filter);
     }
-    
+
     const handleCheckout = (checkout) => {
         setCheckout(!checkout);
     }
-    
+
     const getCurrentProductId = () => {
         const path = window.location.pathname;
         const match = path.match(/\/Product\/(\d+)/);
         return match ? parseInt(match[1], 10) : null;
     }
-    
+
     const value = {
+        data,
         checkout,
         cartItems,
         cartItemsNumber,

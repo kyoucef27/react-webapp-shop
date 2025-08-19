@@ -5,21 +5,22 @@ import { ArrowRight, ShoppingBag, ArrowDownCircle } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
-import Products from '../components/data';
 
+import { useCart } from '../Hooks/Hooks';
 
 const Homepage = () => {
     const [loaded, setLoaded] = useState(false);
     const [featuredProducts, setFeaturedProducts] = useState([]);
-    
+    const { data } = useCart();
+    const Products = data;
     useEffect(() => {
         setLoaded(true);
-        
+
         const featured = [...Products]
             .sort((a, b) => b.stars - a.stars)
             .slice(0, 5);
         setFeaturedProducts(featured);
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -27,9 +28,9 @@ const Homepage = () => {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        
+
         return () => {
             document.querySelectorAll('.reveal').forEach(el => observer.unobserve(el));
         };
@@ -37,42 +38,42 @@ const Homepage = () => {
 
     const containerVariants = {
         hidden: { opacity: 0 },
-        show: { 
+        show: {
             opacity: 1,
-            transition: { 
+            transition: {
                 staggerChildren: 0.1,
                 delayChildren: 0.3
             }
         }
     };
-    
+
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
-        show: { y: 0, opacity: 1, transition: { duration: 0.6 }}
+        show: { y: 0, opacity: 1, transition: { duration: 0.6 } }
     };
-    
+
     return (
         <div className="min-h-screen flex flex-col overflow-x-hidden">
             <NavBar />
-            
+
             <div className="relative bg-gradient-to-b from-indigo-900 to-indigo-600 overflow-hidden h-[80vh]">
                 <div className="absolute inset-0 bg-grid-pattern opacity-5 z-[1]"></div>
-                
-                <motion.div 
+
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.2 }}
                     transition={{ delay: 0.5, duration: 1.5 }}
                     className="absolute inset-0 bg-[url('../assets/img1.jpg')] bg-cover bg-center z-[2]"
                     style={{ backgroundAttachment: "fixed" }}
                 ></motion.div>
-                
-                <div 
+
+                <div
                     className="absolute inset-0 bg-gradient-to-r from-indigo-900/80 to-indigo-600/40 z-[3]"
                 ></div>
-                
+
                 <div className="container mx-auto px-4 h-full relative z-[5] flex flex-col justify-center">
                     <div className="max-w-4xl mx-auto text-center">
-                        <motion.div 
+                        <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
@@ -82,8 +83,8 @@ const Homepage = () => {
                                 <ShoppingBag size={48} className="text-indigo-600" />
                             </div>
                         </motion.div>
-                        
-                        <motion.h1 
+
+                        <motion.h1
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
@@ -93,8 +94,8 @@ const Homepage = () => {
                                 Elegance Redefined
                             </span>
                         </motion.h1>
-                        
-                        <motion.p 
+
+                        <motion.p
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.7, duration: 0.8 }}
@@ -102,26 +103,26 @@ const Homepage = () => {
                         >
                             Discover a curated collection of fashion that speaks to your unique style and personality.
                         </motion.p>
-                        
-                        <motion.div 
+
+                        <motion.div
                             className="flex flex-col sm:flex-row justify-center gap-4"
                             variants={containerVariants}
                             initial="hidden"
                             animate="show"
                         >
                             <motion.div variants={itemVariants}>
-                                <Link 
-                                    to="/Products" 
+                                <Link
+                                    to="/Products"
                                     className="px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-lg hover:bg-indigo-50 transition-all transform hover:scale-105"
                                 >
                                     Shop Now
                                     <ArrowRight size={18} />
                                 </Link>
                             </motion.div>
-                            
+
                             <motion.div variants={itemVariants}>
-                                <Link 
-                                    to="/favorites" 
+                                <Link
+                                    to="/favorites"
                                     className="px-8 py-4 bg-transparent text-white rounded-lg font-semibold border-2 border-white flex items-center justify-center shadow-lg hover:bg-white/10 transition-all transform hover:scale-105"
                                 >
                                     View Favorites
@@ -130,8 +131,8 @@ const Homepage = () => {
                         </motion.div>
                     </div>
                 </div>
-                
-                <motion.div 
+
+                <motion.div
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 1.5, duration: 0.8 }}
@@ -141,7 +142,7 @@ const Homepage = () => {
                     <ArrowDownCircle className="animate-bounce mx-auto" size={32} />
                 </motion.div>
             </div>
-            
+
             <div className="bg-gradient-to-b from-gray-100 to-white py-16 overflow-x-hidden">
                 <div className="container mx-auto px-4">
                     <motion.div
@@ -154,13 +155,13 @@ const Homepage = () => {
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
                         <p className="text-gray-600 max-w-2xl mx-auto">Discover our most popular items loved by customers</p>
                     </motion.div>
-                    
+
                     <Swiper
                         modules={[Autoplay, Pagination, EffectFade]}
                         spaceBetween={20}
                         slidesPerView={1}
                         pagination={{ clickable: true }}
-                        autoplay={{ 
+                        autoplay={{
                             delay: 3000,
                             disableOnInteraction: false
                         }}
@@ -174,14 +175,14 @@ const Homepage = () => {
                     >
                         {featuredProducts.map((product) => (
                             <SwiperSlide key={product.id} className="h-auto">
-                                <motion.div 
+                                <motion.div
                                     whileHover={{ y: -10, scale: 1.03 }}
                                     transition={{ duration: 0.3 }}
                                     className="bg-white rounded-xl overflow-hidden shadow-lg h-full"
                                 >
                                     <Link to={`/Product/${product.id}`} className="block relative">
                                         <div className="aspect-square overflow-hidden">
-                                            <img 
+                                            <img
                                                 src={`../assets/img${product.id}.jpg`}
                                                 alt={product.name}
                                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
@@ -191,7 +192,7 @@ const Homepage = () => {
                                             TOP RATED
                                         </div>
                                     </Link>
-                                    
+
                                     <div className="p-5">
                                         <Link to={`/Product/${product.id}`} className="block">
                                             <h3 className="font-bold text-lg mb-1 text-gray-900 hover:text-indigo-600 transition-colors">{product.name}</h3>
@@ -210,14 +211,14 @@ const Homepage = () => {
                     </Swiper>
                 </div>
             </div>
-            
-            
+
+
             <div className="bg-gray-100 py-20 px-4 overflow-x-hidden">
                 <div className="container mx-auto">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 reveal transform translate-y-10 opacity-0 transition-all duration-1000">
                         Why Choose Our Collections
                     </h2>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         {[
                             {
@@ -236,11 +237,11 @@ const Homepage = () => {
                                 icon: "🌱"
                             }
                         ].map((feature, index) => (
-                            <motion.div 
-                                key={index} 
+                            <motion.div
+                                key={index}
                                 className="bg-white p-8 rounded-xl shadow-lg text-center reveal transform translate-y-10 opacity-0 transition-all duration-1000"
                                 style={{ transitionDelay: `${0.2 * index}s` }}
-                                whileHover={{ 
+                                whileHover={{
                                     y: -10,
                                     boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
                                 }}
@@ -253,7 +254,7 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="bg-indigo-600 bg-[url('../assets/pattern-dots.svg')] bg-fixed text-white py-16 px-4 overflow-x-hidden">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -263,7 +264,7 @@ const Homepage = () => {
                             { value: '50+', label: 'Brands' },
                             { value: '4.8/5', label: 'Customer Rating' },
                         ].map((stat, index) => (
-                            <motion.div 
+                            <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -278,22 +279,22 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="bg-indigo-600 text-white py-16 px-4 overflow-x-hidden reveal transform translate-y-10 opacity-0 transition-all duration-1000">
                 <div className="container mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Redefine Your Style?</h2>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto mb-10">
                         Join thousands of satisfied customers who have transformed their wardrobe with our collections.
                     </p>
-                    <Link 
-                        to="/Products" 
+                    <Link
+                        to="/Products"
                         className="px-8 py-4 bg-white text-indigo-600 rounded-lg font-bold hover:bg-gray-100 transition-all shadow-lg inline-block"
                     >
                         Explore Collection
                     </Link>
                 </div>
             </div>
-            
+
             <style jsx>{`
                 .reveal {
                     transition: all 1s cubic-bezier(0.5, 0, 0, 1);

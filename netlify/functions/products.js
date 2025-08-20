@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const Product = require('../../backend/models/Product').Product;
+const Product = require('./models/Product').Product;
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const API_KEY = process.env.MY_SECRET_KEY; 

@@ -1,18 +1,7 @@
-import mongoose, { Schema, models } from "mongoose";
+// backend/models/Product.js
+import mongoose from "mongoose";
 
-export interface IProduct extends mongoose.Document {
-  name: string;
-  price: number;
-  desc: string;
-  fullDesc: string;
-  gender: "Man" | "Woman" | "Kid" | "Parfume";
-  views: number;
-  stars: number;
-  sold: number;
-  pictures: string[];
-}
-
-const productSchema = new Schema<IProduct>(
+const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -55,5 +44,7 @@ const productSchema = new Schema<IProduct>(
   { timestamps: true }
 );
 
-export const Product =
-  models.Product || mongoose.model<IProduct>("Product", productSchema);
+// Reuse existing model if already compiled (important in serverless)
+const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
+
+export default Product;

@@ -1,8 +1,9 @@
-import mongoose from 'mongoose';
-const Product = require('./models/Product').Product;
+// netlify/functions/products.js
+import mongoose from "mongoose";
+import Product from "./models/Product.js";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const API_KEY = process.env.MY_SECRET_KEY; 
+const API_KEY = process.env.MY_SECRET_KEY;
 
 async function connectDB() {
   if (mongoose.connection.readyState >= 1) return;
@@ -14,16 +15,17 @@ async function connectDB() {
 
 export async function handler(event, context) {
   try {
-    const requestApiKey = event.headers['x-api-key'];
+    // API key check
+    const requestApiKey = event.headers["x-api-key"];
     if (requestApiKey && requestApiKey !== API_KEY) {
       return {
-        statusCode: 200,
-        body: JSON.stringify({ success: false, error: 'Unauthorized' }),
+        statusCode: 401,
+        body: JSON.stringify({ success: false, error: "Unauthorized" }),
       };
     }
 
+    // Connect & query
     await connectDB();
-
     const products = await Product.find({});
 
     return {
@@ -32,7 +34,7 @@ export async function handler(event, context) {
     };
   } catch (err) {
     return {
-      statusCode: 200,
+      statusCode: 500,
       body: JSON.stringify({ success: false, error: err.message }),
     };
   }

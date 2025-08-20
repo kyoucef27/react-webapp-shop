@@ -7,10 +7,7 @@ const API_KEY = process.env.MY_SECRET_KEY;
 
 async function connectDB() {
   if (mongoose.connection.readyState >= 1) return;
-  await mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(MONGODB_URI);
 }
 
 export async function handler(event, context) {

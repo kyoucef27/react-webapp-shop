@@ -21,7 +21,7 @@ const PopOverHook = ({ children }) => {
         }
         
         const groupedItems = items.reduce((acc, item) => {
-            const existingItemIndex = acc.findIndex(i => i.id === item.id);
+            const existingItemIndex = acc.findIndex(i => i.specid === item.specid);
             if (existingItemIndex >= 0) {
                 return acc;
             } else {
@@ -32,7 +32,7 @@ const PopOverHook = ({ children }) => {
         
         return groupedItems.map((item, index) => (
             <div key={index} className="px-2 py-2 border-b last:border-b-0 flex items-center space-x-2">
-                <Link to={`/Product/${item.id}`} className="flex-shrink-0">
+                <Link to={`/Product/${item.specid}`} className="flex-shrink-0">
                     <img 
                         src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${item.specid}.ivif`} 
                         alt={item.name} 
@@ -41,7 +41,7 @@ const PopOverHook = ({ children }) => {
                 </Link>
                 
                 <div className="flex flex-col flex-grow min-w-0">
-                    <Link to={`/Product/${item.id}`} className="font-medium text-gray-800 truncate">
+                    <Link to={`/Product/${item.specid}`} className="font-medium text-gray-800 truncate">
                         {item.name}
                     </Link>
                     <span className="text-indigo-600 font-medium">{item.price}DA</span>
@@ -50,7 +50,7 @@ const PopOverHook = ({ children }) => {
                         <div className="flex items-center border rounded">
                             <button 
                                 className="px-2 py-1 text-gray-600 hover:bg-gray-100"
-                                onClick={() => decreaseQuantity(item.id)}
+                                onClick={() => decreaseQuantity(item.specid)}
                             >
                                 <FiMinus size={14} />
                             </button>
@@ -65,7 +65,7 @@ const PopOverHook = ({ children }) => {
                         
                         <button 
                             className="text-red-500 hover:text-red-700" 
-                            onClick={() => clearCartItem(item.id)}
+                            onClick={() => clearCartItem(item.specid)}
                         >
                             <FaRegTrashAlt size={14} />
                         </button>

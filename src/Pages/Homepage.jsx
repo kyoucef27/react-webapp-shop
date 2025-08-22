@@ -91,7 +91,7 @@ const Homepage = () => {
                             className="text-5xl md:text-7xl font-extrabold mb-6 text-white"
                         >
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-indigo-200">
-                                Elegance Redefined
+                                NadiaLuxe
                             </span>
                         </motion.h1>
 
@@ -139,7 +139,6 @@ const Homepage = () => {
                     className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center text-white z-[5]"
                 >
                     <p className="mb-2 text-sm font-medium text-indigo-200">Scroll Down</p>
-                    <ArrowDownCircle className="animate-bounce mx-auto" size={32} />
                 </motion.div>
             </div>
 
@@ -174,16 +173,16 @@ const Homepage = () => {
                         className="featured-products-swiper pb-12"
                     >
                         {featuredProducts.map((product) => (
-                            <SwiperSlide key={product.id} className="h-auto">
+                            <SwiperSlide key={product.specid} className="h-auto">
                                 <motion.div
                                     whileHover={{ y: -10, scale: 1.03 }}
                                     transition={{ duration: 0.3 }}
                                     className="bg-white rounded-xl overflow-hidden shadow-lg h-full"
                                 >
-                                    <Link to={`/Product/${product.id}`} className="block relative">
+                                    <Link to={`/Product/${product.specid}`} className="block relative">
                                         <div className="aspect-square overflow-hidden">
                                             <img
-                                                src={`../assets/img${product.id}.jpg`}
+                                                src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${product.specid}.jpg`}
                                                 alt={product.name}
                                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                             />
@@ -194,7 +193,7 @@ const Homepage = () => {
                                     </Link>
 
                                     <div className="p-5">
-                                        <Link to={`/Product/${product.id}`} className="block">
+                                        <Link to={`/Product/${product.specid}`} className="block">
                                             <h3 className="font-bold text-lg mb-1 text-gray-900 hover:text-indigo-600 transition-colors">{product.name}</h3>
                                         </Link>
                                         <div className="flex items-center mb-2">
@@ -259,9 +258,9 @@ const Homepage = () => {
                 <div className="container mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
-                            { value: '5000+', label: 'Happy Customers' },
-                            { value: '500+', label: 'Products' },
-                            { value: '50+', label: 'Brands' },
+                            { value: '100+', label: 'Happy Customers' },
+                            { value: '50+', label: 'Products' },
+                            { value: '30+', label: 'Brands' },
                             { value: '4.8/5', label: 'Customer Rating' },
                         ].map((stat, index) => (
                             <motion.div
@@ -284,7 +283,7 @@ const Homepage = () => {
                 <div className="container mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Redefine Your Style?</h2>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto mb-10">
-                        Join thousands of satisfied customers who have transformed their wardrobe with our collections.
+                        Join hundreds of satisfied customers who have transformed their wardrobe with our collections.
                     </p>
                     <Link
                         to="/Products"

@@ -24,11 +24,11 @@ const Favorites = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {favorites.map((product) => (
-              <div key={product.id} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div key={product.specid} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="relative">
-                  <Link to={`/Product/${product.id}`}>
+                  <Link to={`/Product/${product.specid}`}>
                     <img 
-                      src={`../assets/img${product.id}.jpg`} 
+                      src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${product.id}.jpg`} 
                       alt={product.name} 
                       className="w-full h-64 object-cover"
                     />

@@ -66,13 +66,13 @@ const Product = () => {
         <nav className="flex mb-8 text-sm">
           <ol className="flex items-center space-x-2">
             <li>
-              <Link href="/" className="text-gray-500 hover:text-indigo-600">Home</Link>
+              <Link to="/" className="text-gray-500 hover:text-indigo-600">Home</Link>
             </li>
             <li>
               <span className="text-gray-500">/</span>
             </li>
             <li>
-              <Link href="/Products" className="text-gray-500 hover:text-indigo-600">Products</Link>
+              <Link to="/Products" className="text-gray-500 hover:text-indigo-600">Products</Link>
             </li>
             <li>
               <span className="text-gray-500">/</span>

@@ -194,18 +194,7 @@ const Homepage = () => {
                                         </div>
                                     </Link>
 
-                                    <div className="p-5">
-                                        <Link to={`/Product/${product.specid}`} className="block">
-                                            <h3 className="font-bold text-lg mb-1 text-gray-900 hover:text-indigo-600 transition-colors">{product.name}</h3>
-                                        </Link>
-                                        <div className="flex items-center mb-2">
-                                            {Array(5).fill().map((_, i) => (
-                                                <span key={i} className={`text-sm ${i < product.stars ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
-                                            ))}
-                                            <span className="ml-1 text-xs text-gray-500">({product.reviews.length} reviews)</span>
-                                        </div>
-                                        <p className="font-semibold text-indigo-600 text-lg">{product.price} DA</p>
-                                    </div>
+                                    
                                 </motion.div>
                             </SwiperSlide>
                         ))}

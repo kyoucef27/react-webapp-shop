@@ -77,7 +77,7 @@ const Checkout = ({ cartItems }) => {
     }
 
     const groupedItems = cartItems.reduce((acc, item) => {
-        const existingItemIndex = acc.findIndex(i => i.id === item.id);
+        const existingItemIndex = acc.findIndex(i => i.id === item.specid);
         if (existingItemIndex >= 0) {
             return acc;
         } else {
@@ -114,7 +114,7 @@ const Checkout = ({ cartItems }) => {
                         ) : (
                             <div className="space-y-4">
                                 {groupedItems.map((item) => (
-                                    <div key={item.id} className="flex border-b pb-4 mb-4">
+                                    <div key={item.specid} className="flex border-b pb-4 mb-4">
                                         <div className="w-24 h-24 flex-shrink-0">
                                             <img
                                                 src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${item.specid}.avif`}
@@ -127,7 +127,7 @@ const Checkout = ({ cartItems }) => {
                                                 <h4 className="text-gray-800 font-medium">{item.name}</h4>
                                                 <button
                                                     className="text-red-500 hover:text-red-700"
-                                                    onClick={() => handleDel(item.id)}
+                                                    onClick={() => handleDel(item.specid)}
                                                 >
                                                     <FaRegTrashAlt />
                                                 </button>
@@ -138,7 +138,7 @@ const Checkout = ({ cartItems }) => {
                                                 <div className="flex items-center border rounded">
                                                     <button
                                                         className="px-2 py-1 text-gray-600 hover:bg-gray-100"
-                                                        onClick={() => decreaseQuantity(item.id)}
+                                                        onClick={() => decreaseQuantity(item.specid)}
                                                     >
                                                         <FiMinus size={14} />
                                                     </button>

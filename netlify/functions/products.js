@@ -1,6 +1,8 @@
 // netlify/functions/products.js
 import mongoose from "mongoose";
-import Product from "./models/Product.js";
+
+import ProductModule from "./models/Product.js";
+const Product = ProductModule.default;
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const API_KEY = process.env.MY_SECRET_KEY;

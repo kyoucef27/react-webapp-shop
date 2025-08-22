@@ -90,7 +90,7 @@ const CartProvider = ({ children }) => {
     };
 
     const clearCartItem = (id) => {
-        const updatedCartItems = cartItems.filter(item => item.id !== id);
+        const updatedCartItems = cartItems.filter(item => item.specid !== id);
         setCartItems(updatedCartItems);
         const removedCount = cartItems.length - updatedCartItems.length;
         setCartItemsNumber(cartItemsNumber - removedCount);
@@ -104,7 +104,7 @@ const CartProvider = ({ children }) => {
 
     const handleAddToCart = (product) => {
         const existingItemIndex = cartItems.findIndex(
-            item => item.id === product.id && item.selectedSize === (product.selectedSize || selectedSize)
+            item => item.specid === product.specid && item.selectedSize === (product.selectedSize || selectedSize)
         );
 
         if (existingItemIndex >= 0) {

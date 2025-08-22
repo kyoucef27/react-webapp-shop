@@ -34,7 +34,7 @@ const Homepage = () => {
         return () => {
             document.querySelectorAll('.reveal').forEach(el => observer.unobserve(el));
         };
-    }, []);
+    }, [Products]);
 
     const containerVariants = {
         hidden: { opacity: 0 },

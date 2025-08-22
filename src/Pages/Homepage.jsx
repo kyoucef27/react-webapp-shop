@@ -8,9 +8,7 @@ import { motion } from 'framer-motion';
 import { useCart } from '../Hooks/Hooks';
 
 const Homepage = () => {
-    useEffect(() => {
-        console.log("Homepage mounted — runs only once");
-    }, []);
+    
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const { data } = useCart();
     const Products = data;

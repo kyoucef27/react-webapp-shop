@@ -21,7 +21,7 @@ const Checkout = ({ cartItems }) => {
 
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
-        
+
         try {
             const form = document.getElementById('checkout-form');
             const userInfo = {
@@ -31,10 +31,10 @@ const Checkout = ({ cartItems }) => {
                 city: form.city.value,
                 address: form.address.value
             };
-            
+
             const cartTotal = calculateTotal(cartItems);
-            
-            const res = await fetch("/.netlify/functions/place-order", { 
+
+            const res = await fetch("/.netlify/functions/place-order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -45,23 +45,24 @@ const Checkout = ({ cartItems }) => {
                             price: item.price,
                             quantity: item.quantity || 1,
                             specid: item.specid
-                        })),   
+                        })),
                         total: cartTotal + 550,
                         customer: userInfo,
                         timestamp: new Date().toISOString(),
                     }
                 }),
             });
-            
+
             if (!res.ok) {
                 throw new Error(`Server responded with status: ${res.status}`);
             }
-            
+
             const data = await res.json();
             if (data.success) {
                 alert("Order placed successfully!");
                 ClearCart();
-                navigate('/');
+                setTimeout(() => navigate('/'), 0);  
+
             } else {
                 alert("Failed to place order: " + (data.message || "Unknown error"));
             }

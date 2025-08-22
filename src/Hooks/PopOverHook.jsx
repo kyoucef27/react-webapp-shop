@@ -34,7 +34,7 @@ const PopOverHook = ({ children }) => {
             <div key={index} className="px-2 py-2 border-b last:border-b-0 flex items-center space-x-2">
                 <Link to={`/Product/${item.id}`} className="flex-shrink-0">
                     <img 
-                        src={`/assets/img${item.id}.jpg`} 
+                        src={`https://res.cloudinary.com/dvdvzl5r1/image/upload/v1755538855/${item.id}.ivif`} 
                         alt={item.name} 
                         className="w-14 h-14 object-cover rounded"
                     />

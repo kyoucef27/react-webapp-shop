@@ -53,14 +53,14 @@ const ProductDetails = ({
     const { toggleFavorite, isProductFavorite, selectedSize, handleSizeSelect } = useCart();
     const product = { id: ID, name: productName, price: productPrice };
     const isFavorite = isProductFavorite(ID);
-    const [mainImg, setMainImg] = useState(`../assets/img${ID}.jpg`);
+    const [mainImg, setMainImg] = useState(``);
     const [addedToCart, setAddedToCart] = useState(false);
 
     const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
     const displayImages = productImages && productImages.length > 0 
         ? productImages 
-        : [`../assets/img${ID}.jpg`];
+        : [``];
 
     const handleAddToCart = () => {
         const productWithSize = {

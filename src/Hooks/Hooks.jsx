@@ -135,7 +135,7 @@ const CartProvider = ({ children }) => {
     };
 
     const decreaseQuantity = (productId) => {
-        const existingItemIndex = cartItems.findIndex(item => item.id === productId);
+        const existingItemIndex = cartItems.findIndex(item => item.specid === productId);
 
         if (existingItemIndex >= 0) {
             const updatedCartItems = [...cartItems];
@@ -151,10 +151,10 @@ const CartProvider = ({ children }) => {
     };
 
     const toggleFavorite = (product) => {
-        const isFavorite = favorites.some(item => item.id === product.id);
+        const isFavorite = favorites.some(item => item.specid === product.specid);
 
         if (isFavorite) {
-            setFavorites(favorites.filter(item => item.id !== product.id));
+            setFavorites(favorites.filter(item => item.specid !== product.specid));
             showNotification('Removed from favorites', product, 'success');
         } else {
             setFavorites([...favorites, product]);
@@ -163,7 +163,7 @@ const CartProvider = ({ children }) => {
     };
 
     const isProductFavorite = (productId) => {
-        return favorites.some(item => item.id === productId);
+        return favorites.some(item => item.specid === productId);
     };
 
     const handleFilter = (filter) => {

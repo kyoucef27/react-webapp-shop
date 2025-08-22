@@ -9,7 +9,7 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 const Checkout = ({ cartItems }) => {
     const navigate = useNavigate();
     const gotoMain = () => {
-        navigate('/');
+        setTimeout(() => navigate('/'), 0);
     }
     const { calculateTotal } = usePop();
     const {

@@ -137,8 +137,10 @@ const Homepage = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 1.5, duration: 0.8 }}
                     className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center text-white z-[5]"
+                    style={{ marginTop: '20px' }}
                 >
                     <p className="mb-2 text-sm font-medium text-indigo-200">Scroll Down</p>
+                    <ArrowDownCircle className="animate-bounce mx-auto" size={32} />
                 </motion.div>
             </div>
 

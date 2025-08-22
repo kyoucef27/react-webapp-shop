@@ -23,6 +23,7 @@ export async function handler(event, context) {
 
     // Connect & query
     await connectDB();
+    console.log("Product import:", Product);
     const products = await Product.find({});
 
     return {

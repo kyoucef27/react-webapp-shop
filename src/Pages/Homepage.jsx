@@ -63,7 +63,7 @@ const Homepage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.2 }}
                     transition={{ delay: 0.5, duration: 1.5 }}
-                    className="absolute inset-0 bg-[url('../assets/img1.jpg')] bg-cover bg-center z-[2]"
+                    className="absolute inset-0 bg-[url('')] bg-cover bg-center z-[2]"
                     style={{ backgroundAttachment: "fixed" }}
                 ></motion.div>
 

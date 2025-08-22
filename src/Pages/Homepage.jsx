@@ -5,17 +5,18 @@ import { ArrowRight, ShoppingBag, ArrowDownCircle } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
-
+import { useLocation } from 'react-router-dom';
 import { useCart } from '../Hooks/Hooks';
 
 const Homepage = () => {
+    const location = useLocation();
     const [loaded, setLoaded] = useState(false);
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const { data } = useCart();
     const Products = data;
     useEffect(() => {
         setLoaded(true);
-
+        if (location.pathname !== "/") return;
         const featured = [...Products]
             .sort((a, b) => b.stars - a.stars)
             .slice(0, 5);
@@ -34,7 +35,7 @@ const Homepage = () => {
         return () => {
             document.querySelectorAll('.reveal').forEach(el => observer.unobserve(el));
         };
-    }, []);
+    }, [location.pathname]);
 
     const containerVariants = {
         hidden: { opacity: 0 },

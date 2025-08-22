@@ -4,7 +4,7 @@ import { useCart } from '../Hooks/Hooks'
 import NavBar from '../components/NavBar'
 import { FaStar } from 'react-icons/fa'
 import { Heart, ShoppingBag, CheckCircle, Maximize2 } from 'lucide-react'
-
+import { Link } from 'react-router-dom'
 const Product = () => {
   const { id } = useParams();
   console.log(id)
@@ -66,13 +66,13 @@ const Product = () => {
         <nav className="flex mb-8 text-sm">
           <ol className="flex items-center space-x-2">
             <li>
-              <a href="/" className="text-gray-500 hover:text-indigo-600">Home</a>
+              <Link href="/" className="text-gray-500 hover:text-indigo-600">Home</Link>
             </li>
             <li>
               <span className="text-gray-500">/</span>
             </li>
             <li>
-              <a href="/products" className="text-gray-500 hover:text-indigo-600">Products</a>
+              <Link href="/Products" className="text-gray-500 hover:text-indigo-600">Products</Link>
             </li>
             <li>
               <span className="text-gray-500">/</span>

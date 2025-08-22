@@ -6,17 +6,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { useCart } from '../Hooks/Hooks';
-import { useLocation } from "react-router-dom";
+
 const Homepage = () => {
-    const location = useLocation();
-
     useEffect(() => {
-        if (location.pathname === "/") {
-            window.location.reload();
-        }
-    }, [location.pathname]);
-
-    const [loaded, setLoaded] = useState(false);
+        console.log("Homepage mounted — runs only once");
+    }, []);
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const { data } = useCart();
     const Products = data;

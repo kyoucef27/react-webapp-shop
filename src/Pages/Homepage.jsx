@@ -5,10 +5,11 @@ import { ArrowRight, ShoppingBag, ArrowDownCircle } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
+
 import { useCart } from '../Hooks/Hooks';
 
 const Homepage = () => {
-    
+    const [loaded, setLoaded] = useState(false);
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const { data } = useCart();
     const Products = data;
